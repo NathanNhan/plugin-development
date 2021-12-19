@@ -14,10 +14,17 @@ Text Domain: quizdomain
 
  class AreYouPayingAttention {
      function __construct () {
-        add_action('enqueue_block_editor_assets' , array($this, 'adminAsset'));
+        add_action('init' , array($this, 'adminAsset'));
      }
      function adminAsset () {
-         wp_enqueue_script('ourNewBlockType', plugin_dir_url(__FILE__) . 'test.js' , array('wp-blocks', 'wp-element'));
+         wp_register_script('ourNewBlockType', plugin_dir_url(__FILE__) . 'build/index.js' , array('wp-blocks', 'wp-element'));
+         register_block_type('outplugin/are-you-paying-attent' , array(
+             "editor_script" => 'ourNewBlockType',
+             "render_callback" => array($this,'renderHTML')
+         ));
+     }
+     function renderHTML ($attr) {
+         return '<p>today the sky is ' . $attr['skypeColor'] .' and the grass is ' . $attr['grassColor'] . '</p>';
      }
  }
 
