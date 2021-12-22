@@ -91,7 +91,7 @@ class wordCoundPlugin {
         <?php }
     
     function checkBoxHTML ($args) { ?>
-           <input type="checkbox" name="<?php echo $args['theName'] ?>" value="1" <?php checked(get_option('', '1'))?>>
+           <input type="checkbox" name="<?php echo $args['theName'] ?>" value="1" <?php checked(get_option($args['theName'], '1'))?>>
     <?php }
 
     function locationHTML () { ?>
